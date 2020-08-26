@@ -15,8 +15,8 @@ set undodir=~/.vim/undodir
 set undofile
 set termguicolors
 set scrolloff=8
-set ruler
 set cursorline
+set noshowmode
 
 "Enable yanking across vim
 set clipboard=unnamed
@@ -49,10 +49,18 @@ Plug 'mbbill/undotree'
 Plug 'https://github.com/ycm-core/YouCompleteMe.git'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'vim-airline/vim-airline'
 call plug#end()
 
 colorscheme gruvbox
 set background=dark
+if exists('+termguicolors')
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_invert_selection='0'
+
 
 if executable('rg')
     let g:rg_derive_root='true'
