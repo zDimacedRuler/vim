@@ -17,13 +17,15 @@ set undofile
 set incsearch
 set termguicolors
 set scrolloff=8
+set ruler
+set cursorline
 
 " Give more space for displaying messages.
 set cmdheight=2
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=50
+set updatetime=300
 
 set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
@@ -47,12 +49,33 @@ if executable('rg')
     let g:rg_derive_root='true'
 endif
 
+let mapleader = " "
+nnoremap <leader>u :UndotreeShow<CR>
+
+nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+nnoremap <leader>h :wincmd h<CR>
+nnoremap <leader>j :wincmd j<CR>
+nnoremap <leader>k :wincmd k<CR>
+nnoremap <leader>l :wincmd l<CR>
+
+nnoremap <leader>n :tabn<CR>
+nnoremap <leader>p :tabp<CR>
+
+nnoremap <leader>gi :YcmCompleter GoToInclude<CR>
+nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gr :YcmCompleter GoToReferences<CR>
+
+" Disable YCM PopUp
 set completeopt-=preview
-let g:netrw_browse_split=2
+
+let g:netrw_browse_split=4
 let g:netrw_banner=0
-let g:ctrlp_use_caching=0
 let g:netrw_winsize=25
 
+" Ctrlp Settings
+let g:ctrlp_use_caching=0
+
+" Compiling C++ Mappings
 autocmd BufNewFile *.cpp execute "0r ~/.vim/template/".input("Template name: ").".cpp"
 map <F9> :!g++ -g % -o %:r && ./%:r <CR>
 map <F5> :!g++ -g % -o %:r <CR>
