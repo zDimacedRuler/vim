@@ -19,7 +19,7 @@ set cursorline
 set noshowmode
 set encoding=utf-8
 
-"Enable yanking across vim
+" Enable yanking across vim
 set clipboard=unnamed
 
 " Search Settings
@@ -31,14 +31,13 @@ set shortmess-=S
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=300
+set updatetime=1000
 
 set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
-Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-utils/vim-man'
 Plug 'lyuts/vim-rtags'
@@ -65,7 +64,6 @@ if executable('rg')
 endif
 
 let mapleader = " "
-nnoremap <C-p> :Files<CR>
 
 nnoremap <leader>u :UndotreeShow<CR>
 
@@ -82,28 +80,47 @@ nnoremap <leader>gi :YcmCompleter GoToInclude<CR>
 nnoremap <leader>gd :YcmCompleter GoTo<CR>
 nnoremap <leader>gr :YcmCompleter GoToReferences<CR>
 
+" To Remove all trailing whitespaces by pressing F6
+nnoremap <F6> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+" Auto Indent Whole File
+nnoremap <leader>= gg=G''
+" replace current highlighted word
+nnoremap <leader>r :%s///g<left><left>
+nnoremap <leader>rc :%s///gc<left><left><left>
+
+
+" YCM Settings
+let g:ycm_global_ycm_extra_conf = '$HOME/.vim/ycm_extra_conf/ycm_extra_conf.py'
 " Disable YCM PopUp
 set completeopt-=preview
+" <C-y> is used to close completion menu
+" <leader>d shows full diagnostic text
 
-" fzf settings
+" fzf Settings
 let $FZF_DEFAULT_OPTS='--reverse'
+nnoremap <C-p> :Files<CR>
+nnoremap <C-b> :Buffers<CR>
+"requires rg
+nnoremap <C-f> :Rg!
 
-" vim airline
+" Vim-airline Settings
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_theme='luna'
+let g:airline_powerline_fonts = 1
 
+" Netrw settings
 let g:netrw_browse_split=4
 let g:netrw_banner=0
 let g:netrw_winsize=25
 
-"Remove all trailing whitespace by pressing F6
-nnoremap <F6> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
-
-" Compiling C++ Mappings
+" Compiling C++ files Mappings
 autocmd BufNewFile *.cpp execute "0r ~/.vim/template/".input("Template name: ").".cpp"
 nnoremap <F9> :!g++ -g % -o %:r && ./%:r <CR>
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 nnoremap <F2> :w <CR>
 nnoremap <F12> :!gdb ./%:r <CR>
 
+" For fast switching between .cpp and .hpp
+nnoremap <leader>s :find %:t:r.cpp<CR>
+nnoremap <leader>h :find %:t:r.hpp<CR>
