@@ -122,5 +122,11 @@ nnoremap <F2> :w <CR>
 nnoremap <F12> :!gdb ./%:r <CR>
 
 " For fast switching between .cpp and .hpp
-nnoremap <leader>s :find %:t:r.cpp<CR>
-nnoremap <leader>h :find %:t:r.hpp<CR>
+function! SwitchSourceHeader()
+    if (expand ("%:e") == "cpp")
+        silent! find %:t:r.hpp
+    else
+        silent! find %:t:r.cpp
+    endif
+endfunction
+nmap <leader>s :call SwitchSourceHeader()<CR>
