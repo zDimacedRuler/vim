@@ -12,3 +12,9 @@
 * Step 5:
   * Complete YCM installation by going in ".vim/plugged/YouCompleteMe/"
   * https://github.com/ycm-core/YouCompleteMe
+* Step 6:
+  * Install rip grep for faster searching
+  * https://github.com/BurntSushi/ripgrep
+* Step 7:
+  * Install powerline fonts for vim airline and ohmyzsh
+  * sudo apt-get install fonts-powerline //for ubuntu
