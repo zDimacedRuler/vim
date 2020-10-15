@@ -114,9 +114,17 @@ let g:netrw_browse_split=4
 let g:netrw_banner=0
 let g:netrw_winsize=25
 
+function! CompileCode()
+    if(expand ("%:e") == "cpp")
+        !g++ -g % -o %:r && ./%:r
+    elseif(expand ("%:e") == "c")
+        !gcc -g % -o %:r && ./%:r
+    endif
+endfunction
+
 " Compiling C++ files Mappings
-autocmd BufNewFile *.cpp execute "0r ~/.vim/template/".input("Template name: ").".cpp"
-nnoremap <F9> :!g++ -g % -o %:r && ./%:r <CR>
+" autocmd BufNewFile *.cpp execute "0r ~/.vim/template/".input("Template name: ").".cpp"
+nnoremap <F9> :call CompileCode()<CR>
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 nnoremap <F2> :w <CR>
 nnoremap <F12> :!gdb ./%:r <CR>
