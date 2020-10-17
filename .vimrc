@@ -47,6 +47,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'majutsushi/tagbar'
 call plug#end()
 
 colorscheme gruvbox
@@ -86,8 +87,6 @@ nnoremap <F6> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 nnoremap <leader>= gg=G''
 " replace current highlighted word
 nnoremap <leader>r :%s///g<left><left>
-nnoremap <leader>rc :%s///gc<left><left><left>
-
 
 " YCM Settings
 let g:ycm_global_ycm_extra_conf = '$HOME/.vim/ycm_extra_conf/ycm_extra_conf.py'
@@ -113,6 +112,9 @@ let g:airline_powerline_fonts = 1
 let g:netrw_browse_split=4
 let g:netrw_banner=0
 let g:netrw_winsize=25
+
+" Tagbar Settings
+nnoremap <F8> :TagbarToggle<CR>
 
 function! CompileCode()
     if(expand ("%:e") == "cpp")
