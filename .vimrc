@@ -28,6 +28,10 @@ set incsearch
 set ignorecase
 " Show search count
 set shortmess-=S
+" Hide AutoComplete Pop status
+set shortmess+=c
+" Enable mouse
+set mouse=a
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -40,9 +44,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-utils/vim-man'
-Plug 'lyuts/vim-rtags'
+"Plug 'lyuts/vim-rtags'
 Plug 'mbbill/undotree'
-Plug 'https://github.com/ycm-core/YouCompleteMe.git'
+"Plug 'https://github.com/ycm-core/YouCompleteMe.git'
+Plug 'vim-scripts/AutoComplPop'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'vim-airline/vim-airline'
